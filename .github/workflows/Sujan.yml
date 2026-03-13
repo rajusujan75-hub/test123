@@ -1,9 +1,23 @@
-steps:
+name: My First Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Say Hello
         run: echo "Hello! My GitHub pipeline is working 🎉"
 
-      - name: Show current folder
+      - name: Show current directory
         run: pwd
 
       - name: List files
         run: ls
+
+      - name: Run my script
+        run: bash hello.sh
