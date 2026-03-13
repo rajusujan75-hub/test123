@@ -10,14 +10,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Say Hello
-        run: echo "Hello! My GitHub pipeline is working 🎉"
+      # 1) Pull your repository content into the runner
+      - name: Check out repository
+        uses: actions/checkout@v4
 
+      # 2) Sanity checks (so you can see what files are present)
       - name: Show current directory
         run: pwd
 
-      - name: List files
-        run: ls
+      - name: List files at repo root
+        run: ls -la
 
+      # 3) Make sure the script is executable (harmless if it already is)
+      - name: Make script executable (if needed)
+        run: chmod +x hello.sh
+
+      # 4) Run the script from the repo root
       - name: Run my script
-        run: bash hello.sh
+        run: ./hello.sh
+
+      # 5) (Optional) Hello message
+      - name: Say Hello
+        run: echo "Hello! My GitHub pipeline is working 🎉"
